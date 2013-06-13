@@ -17,6 +17,7 @@ Usage: python %prog ifile
 
 if len(args) != 1:
     parser.print_help()
+    exit()
 else:
     ifile, = args
 # Import libraries
@@ -26,6 +27,7 @@ from mpl_toolkits.basemap import pyproj
 
 # Open inputfile (ifile should be some path to a file
 ifileo = Dataset(ifile, 'a')
+
 lccdef = ifileo.variables['LambertConformalProjection']
 lcc = pyproj.Proj('+proj=lcc +lon_0=%s +lat_1=%s +lat_2=%s +a=%s +lat_0=%s' % (lccdef.longitude_of_central_meridian, lccdef.standard_parallel[0], lccdef.standard_parallel[1], lccdef.earth_radius, lccdef.latitude_of_projection_origin,)  )
 
@@ -34,20 +36,23 @@ lcc_x, lcc_y = np.meshgrid(ifileo.variables['x'], ifileo.variables['y'])
 lcc_x *= scale
 lcc_y *= scale
 
-lon, lat = lcc(*lcc_xy, inverse = True)
-var = ifileo.createVariable('latitude', lat.dtype.char, ('ROW', 'COL'))
-var[:] = lat
-var.units = 'degrees_north'
-var.standard_name = 'latitude'
+lon, lat = lcc(lcc_x, lcc_y, inverse = True)
+if 'latitude' not in ifileo.variables.keys():
+    var = ifileo.createVariable('latitude', lat.dtype.char, ('ROW', 'COL'))
+    var[:] = lat
+    var.units = 'degrees_north'
+    var.standard_name = 'latitude'
 
-var = ifileo.createVariable('longitude', lon.dtype.char, ('ROW', 'COL'))
-var[:] = lon
-var.units = 'degrees_north'
-var.standard_name = 'longitude';
+if 'longitude' not in ifileo.variables.keys():
+    var = ifileo.createVariable('longitude', lon.dtype.char, ('ROW', 'COL'))
+    var[:] = lon
+    var.units = 'degrees_north'
+    var.standard_name = 'longitude';
 
-for var in ifileo.variables.keys():
+for varkey in ifileo.variables.keys():
+    var = ifileo.variables[varkey]
     olddims = list(var.dimensions)
-    dims = map(lambda x: {'ROW': 'latitude', 'COL': 'longitude'}.get(x, x), olddims)
+    dims = map(lambda x: {'ROW': 'latitude', 'COL': 'longitude', 'TSTEP': 'time', 'LAY': 'level'}.get(x, x), olddims)
     if olddims != dims:
         var.coordinates = ' '.join(dims)
 
