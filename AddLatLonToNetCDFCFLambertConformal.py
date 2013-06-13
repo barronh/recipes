@@ -44,4 +44,11 @@ var = ifileo.createVariable('longitude', lon.dtype.char, ('ROW', 'COL'))
 var[:] = lon
 var.units = 'degrees_north'
 var.standard_name = 'longitude';
+
+for var in ifileo.variables.keys():
+    olddims = list(var.dimensions)
+    dims = map(lambda x: {'ROW': 'latitude', 'COL': 'longitude'}.get(x, x), olddims)
+    if olddims != dims:
+        var.coordinates = ' '.join(dims)
+
 ifileo.close()
