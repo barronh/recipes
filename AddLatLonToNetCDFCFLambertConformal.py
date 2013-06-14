@@ -5,7 +5,7 @@ from optparse import OptionParser
 parser = OptionParser()
 parser.set_usage("""
 
-Usage: python %prog [-m CF|IOAPI] ifile [lccname]
+Usage: python %prog [-c CF|IOAPI] ifile [lccname]
 
   ifile - path to NetCDF file with lccname variable
   lccname - name of CF variable that defines the Lambert 
@@ -13,6 +13,8 @@ Usage: python %prog [-m CF|IOAPI] ifile [lccname]
             LambertConformalProjection (e.g., CAMx or
             CMAQ file converted to NetCDF using netcdf-java)
 """)
+parser.add_option("-c", "--conventions", dest = "conventions", default = "CF", help = "Meta-data Conventions (CF|IOAPI)")
+
 
 
 (options, args) = parser.parse_args()
