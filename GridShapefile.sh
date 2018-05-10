@@ -20,7 +20,7 @@
 PROJ4STR="+proj=lcc +a=6370000 +b=6370000 +lat_0=40 +lon_0=-97 +lat_1=33 +lat_2=45 +x_0=2412000 +y_0=1620000 +no_defs"
 
 # Step 2: Use ogr2ogr to reproject to model projection
-ogr2ogr -t_srs ${PROJ4STR} NEW.shp GIS.OFFICIAL_CLIM_DIVISIONS.shp
+ogr2ogr -t_srs "${PROJ4STR}" NEW.shp GIS.OFFICIAL_CLIM_DIVISIONS.shp
 
 # Step 3: Find attributes that you want to write out by name
 ogrinfo -geom=NO NEW.shp NEW| less
