@@ -3,7 +3,7 @@ To use CMAQ data with ArcGIS it is most convenient to use a CMAQ/WRF projection 
 
 # Create the projection
 
-This section will use meta-data that is available in the GRIDDESC text file or as IOAPI meta-data on the NetCDF file (ncdump -h). Values for the EPA's 12US2 domain are provided as examples.
+This section will use meta-data that is available in the GRIDDESC text file or as IOAPI meta-data on the NetCDF file (ncdump -h). Values for the EPA's 12US1 and 12US2 domain are provided as examples.
 
 1. Open ArcGIS
 2. Right click on "Layers"; Choose "Properties"
@@ -11,20 +11,30 @@ This section will use meta-data that is available in the GRIDDESC text file or a
 4. Select new projected coordinate system (world with asterisk in upper left of dialog box).
 5. Give the new name "EPA 12US2"
 6. Choose "Lambert_Conic_Conformal" for Projection Name from the dropdown menu
-7. Enter False Easting: -XORIG - XCELL/2 (12US2: 2412000 - 6000  = 2406000)
-8. Enter False Northing: -YORIG - YCELL/2 (12US2: 1620000 - 6000 = 1614000)
-9. Enter Central Meridian: XCENT (12US2: -97)
-10. Enter Standard Parallel 1: P_ALP (12US2: 33)
-11. Enter Standard Parallel 2: P_BET (12US2: 45)
+7. Enter False Easting: -XORIG - XCELL/2 
+    * 12US1: 2556000 - 6000 = 2550000
+    * 12US2: 2412000 - 6000  = 2406000
+    * 36US3: 2952000 - 18000 = 2934000
+8. Enter False Northing: -YORIG - YCELL/2
+    * 12US1: 1728000 - 6000. = 1722000
+    * 12US2: 1620000 - 6000 = 1614000
+    * 36US3: 2772000 - 18000 = 2754000
+9. Enter Central Meridian: XCENT (12US1 or 12US2 or 36US3: -97)
+10. Enter Standard Parallel 1: P_ALP (12US1 or 12US2 or 36US3: 33)
+11. Enter Standard Parallel 2: P_BET (12US1 or 12US2 or 36US3: 45)
 12. leave scale factor set to 1
-13. Enter Latitude of Origin: YCENT (12US2: 40)
-14. Choose custom unit and give it a name (e.g., "12km") and enter XCELL (12US2: 12000)
+13. Enter Latitude of Origin: YCENT (12US1 or 12US2: 40)
+14. Choose custom unit and give it a name (e.g., "12km") and enter XCELL
+    * 12US1 or 12US2: 12000
+    * 36US3: 36000
 15. Choose a new geographic transformation
 16. Make a new one called WRF Sphere
 17. set Datum as "D_Sphere_EMEP" or Set "Semi Major" and "Semi Minor" axes = 6370000
 18. Select OK
 19. Select OK
 20. You may be warned that datum projections may have some misalignment.
+
+Most EPA domains share P_ALP, P_BET, XCENT, and YCENT. As a result, almost any EPA domain can be achieved by modifying steps 7, 8, and 14.
  
 # Make NetCDF Raster
 
