@@ -11,7 +11,9 @@ This section will use meta-data that is available in the GRIDDESC text file or a
 3. Name the projection (e.g. 12US2)
 4. Enter a PROJ4 string from the header of the file or from a GRIDDESC
   * LCC template: `+proj=lcc +lon_0=<XCENT> +lat_0=<YCENT> +lat_1=<P_ALP> +lat_2=<P_BET> +x_0=<-XORIG> +y_0=<-YORIG - NROWS * YCELL> +to_meter=<XCELL>m +a=6370000 +a=6370000`
-  * 12US2 example: `+proj=lcc +lon_0=-97.0 +lat_1=33.0 +lat_2=45.0 +lat_0=40.0 +x_0=2412000.0 +y_0=-1332000.0 +to_meter=12000.0m +a=6370000.0 +b=6370000.0 +no_defs`
+  * 12US1 example: `+proj=lcc +lon_0=-97.0 +lat_1=33.0 +lat_2=45.0 +lat_0=40.0 +x_0=2556000.0 +y_0=-1860000 +a=6370000.0 +b=6370000.0 +to_meter=12000.0 +no_defs`
+  * 12US2 example: `+proj=lcc +lon_0=-97.0 +lat_1=33.0 +lat_2=45.0 +lat_0=40.0 +x_0=2412000.0 +y_0=-1332000.0 +to_meter=12000.0 +a=6370000.0 +b=6370000.0 +no_defs`
+  * 36US3 example: `+proj=lcc +lon_0=-97.0 +lat_1=33.0 +lat_2=45.0 +lat_0=40.0 +x_0=2952000.0 +y_0=-2556000.0 +to_meter=36000.0 +a=6370000.0 +b=6370000.0 +no_defs`
 5. Click "OK"
 
 # Add a raster layer and set its projection
