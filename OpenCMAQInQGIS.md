@@ -1,5 +1,5 @@
 # Overview 
-To use CMAQ data with QGIS, you need to create a custom projection and then import a raster file and set its projection. This example is based on the EPA 12US2 projection[1,2]. One oddity in QGIS is that the raster origin is set to the lop left instead of bottom left. These instructions account for the problem. This works with CMAQ emissions, concentration, and metcro data correctly in QGIS.
+To use CMAQ data with QGIS, you need to create a custom projection and then import a raster file and set its projection. The examples is based on the EPA 12US2[1,2] and 12US1[3] and 36US3[4] projections. One oddity in QGIS is that the raster origin is set to the lop left instead of bottom left. These instructions account for the problem. This works with CMAQ emissions, concentration, and metcro data correctly in QGIS.
 
 # Create a custom projection
 
@@ -35,3 +35,6 @@ This section will use meta-data that is available in the GRIDDESC text file or a
  
  [2] "+proj=lcc +a=6370000.0 +b=6370000.0 +lon_0=-97.0 +lat_1=33.0 +lat_2=45.0 +lat_0=40.0 +x_0=2412000.0 +y_0=1620000.0 +to_meter=12000.0m +no_defs"
  
+ [3] The 12US1 projection is the same as 12US2 with the following exceptions: XORIG=-2556000.0, YORIG=-1728000.0, NROWS=299, NCOLS=459.
+ 
+ [4] The 36US3 projection is the same as the 12US2 with the following exceptions: XORIG=-2952000.0, YORIG=-2772000.0, NROWS=148, NCOLS=172, XCELL=36000., YCELL=36000.
